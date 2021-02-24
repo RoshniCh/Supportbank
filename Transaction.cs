@@ -3,7 +3,7 @@ using System.IO;
 
 namespace SupportBank
 {
-    class Transactions
+    class Transaction
     {
     public DateTime Date { get; set; }
     public string From { get; set; }

@@ -8,6 +8,8 @@ namespace SupportBank
         {
             TransactionList myTransList = new TransactionList();
             myTransList.ReadCsvFile();
+            AccountList myAccList = new AccountList();
+            myAccList.MakeAccList(myTransList.TransList);
         }
     }
 }

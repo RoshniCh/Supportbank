@@ -8,7 +8,7 @@ namespace SupportBank
 {
     class TransactionList
     {
-        public List<Transactions> TransList = new List<Transactions>();
+        public List<Transaction> TransList = new List<Transaction>();
         public void ReadCsvFile()
         {
 
@@ -17,7 +17,7 @@ namespace SupportBank
             foreach(string line in lines) {
                 string[] columns = line.Split(',');
                 if (columns[0]!="Date") {
-                    TransList.Add(new Transactions
+                    TransList.Add(new Transaction
                         {
                             Date = Convert.ToDateTime(columns[0]), 
                             // Date = DateTime.ParseExact(columns[0], "dd/mm/yyyy", CultureInfo.InvariantCulture), 
@@ -30,7 +30,7 @@ namespace SupportBank
                 }    
             }   
             // TransList.ForEach(Console.WriteLine);
-            foreach(Transactions tran in TransList)
+            foreach(Transaction tran in TransList)
                 {
                 Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From +" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
                 }
