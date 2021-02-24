@@ -30,10 +30,10 @@ namespace SupportBank
                 }    
             }   
             // TransList.ForEach(Console.WriteLine);
-            foreach(Transaction tran in TransList)
-                {
-                Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From +" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
-                }
+            // foreach(Transaction tran in TransList)
+            //     {
+            //     Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From +" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
+            //     }
         }
     }
 }

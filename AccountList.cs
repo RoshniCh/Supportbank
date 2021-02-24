@@ -38,6 +38,15 @@ namespace SupportBank
                     });
                 }
             }
-        }
+            // foreach (Account Acc in AccList)
+            // {   
+
+            //     Console.WriteLine(Acc.Name); 
+            //     foreach (var InTr in Acc.IncomingTransactions) {
+            //         Console.WriteLine(InTr.From +" "+ InTr.To + " " + InTr.Narrative);
+            //     };
+            // }
+        } 
+          
     }
 }
