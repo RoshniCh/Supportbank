@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3PiPcDSuVxAvEQwqsSR19evzWh6yEPK5VfSWqAgzSnXAb7Gmff+7rALEUSoXPsdUhG5uVZrWLlOfIsrY4BdNig==",
+  "dgSpecHash": "3/ArcE8lk4Qs4jn82oNXiOz2LqwgE8uQKGRalWesh3EqqPlizjtS2rjUbupLkBRiHDfXt8k7dVaGRMAYGBValg==",
   "success": true,
   "projectFilePath": "C:\\Users\\roscha\\training\\SupportBank\\SupportBank.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\roscha\\.nuget\\packages\\nlog\\4.7.7\\nlog.4.7.7.nupkg.sha512"
+  ],
   "logs": []
 }
