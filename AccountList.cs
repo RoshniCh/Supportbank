@@ -38,15 +38,46 @@ namespace SupportBank
                     });
                 }
             }
-            // foreach (Account Acc in AccList)
-            // {   
+            foreach (Account Acc in AccList)
+            {   
 
-            //     Console.WriteLine(Acc.Name); 
-            //     foreach (var InTr in Acc.IncomingTransactions) {
-            //         Console.WriteLine(InTr.From +" "+ InTr.To + " " + InTr.Narrative);
-            //     };
-            // }
-        } 
+                Console.WriteLine(Acc.Name); 
+                foreach (var InTr in Acc.IncomingTransactions) {
+                    Console.WriteLine(InTr.From +" "+ InTr.To + " " + InTr.Narrative);
+                };
+            }
+        }
+
+        public void DisplayAccounts()
+        {
+            Console.WriteLine("Name Amount");
+            foreach (Account Acc in AccList)
+            {   double amount = 0;
+                foreach (var InTr in Acc.IncomingTransactions) {
+                    amount += InTr.Amount; }
+                foreach (var OTr in Acc.OutgoingTransactions) {
+                    amount -= OTr.Amount; }
+                Console.WriteLine(Acc.Name + " " + amount); 
+            };
+        }  
+
+        public void DisplaySingleAccount(string UserName)
+        {
+            Console.WriteLine("Date, From, To, Narrative,Amount");
+            foreach (Account Acc in AccList)
+            {  
+                if (Acc.Name == UserName) {
+                    Console.WriteLine(Acc.Name); 
+                    foreach (var InTr in Acc.IncomingTransactions) {
+                    Console.WriteLine(InTr.Date.ToString("dd/MM/yyyy") + " " + InTr.From +" "+ InTr.To + " " + InTr.Narrative + " " +InTr.Amount );
+                    };
+
+                    foreach (var OTr in Acc.OutgoingTransactions) {
+                    Console.WriteLine(OTr.Date.ToString("dd/MM/yyyy") + " " + OTr.From +" "+ OTr.To + " " + OTr.Narrative + " " +OTr.Amount );
+                    };
+                }
+            }
+        }
           
     }
 }

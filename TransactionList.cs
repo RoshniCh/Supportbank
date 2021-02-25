@@ -6,6 +6,7 @@ using System.Globalization;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
+using Newtonsoft.Json;
 
 namespace SupportBank
 {
@@ -14,16 +15,8 @@ namespace SupportBank
         private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
         public List<Transaction> TransList = new List<Transaction>();
 
-        public static ILogger Logger1 => Logger;
-
         public void ReadCsvFile(string path)
         {
-            var config = new LoggingConfiguration();
-            var target = new FileTarget { FileName = @"C:\Work\Logs\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
-            config.AddTarget("File Logger", target);
-            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
-            LogManager.Configuration = config;
-
             var lines = File.ReadAllLines(path).Skip(1);
             int counter = 1;
             foreach(string line in lines) {
@@ -52,6 +45,21 @@ namespace SupportBank
             //     {
             //     Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From +" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
             //     }
+        }
+        public void ReadJsonFile(string path) {
+            // using (StreamReader r = new StreamReader(path))
+            // {
+                // string json = r.ReadToEnd();
+                string json = File.ReadAllText(path);
+                List<Transaction> TransList = JsonConvert.DeserializeObject<List<Transaction>>(json);
+                // foreach(var tran in TransList)
+                // {
+                // Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From+" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
+                // }
+
+
+            // }
+
         }
     }
 }

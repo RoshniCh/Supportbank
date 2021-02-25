@@ -18,10 +18,19 @@ namespace SupportBank
             LogManager.Configuration = config;
 
             // Logger.Error("test");
-
-            string path = "C:/Users/roscha/training/support-bank-resources/DodgyTransactions2015.csv";
+            string fileExtension = "";
+            Console.WriteLine("Read json or csv file?");
+            fileExtension = Console.ReadLine();
             TransactionList myTransList = new TransactionList();
-            myTransList.ReadCsvFile(path);
+            
+            if (fileExtension == "csv") {
+                string path = "C:/Users/roscha/training/support-bank-resources/DodgyTransactions2015.csv";
+                myTransList.ReadCsvFile(path);
+            } else {
+                string path = "C:/Users/roscha/training/support-bank-resources/Transactions2013.json";
+                myTransList.ReadJsonFile(path);
+            }
+
             AccountList myAccList = new AccountList();
             myAccList.MakeAccList(myTransList.TransList);
 
@@ -29,11 +38,13 @@ namespace SupportBank
             Console.WriteLine("Would you prefer to list all transactions (All) or to specify username (Firstname Last Initial)?: ");
             option = Console.ReadLine();
             if (option == "All") {
-                AccountListAll myAccListAll = new AccountListAll();
-                myAccListAll.DisplayAccounts(myAccList.AccList);
+                // AccountListAll myAccListAll = new AccountListAll();
+                // myAccListAll.DisplayAccounts(myAccList.AccList);
+                myAccList.DisplayAccounts();
             } else {
-                AccountListName myAccListName = new AccountListName();
-                myAccListName.DisplaySingleAccount(myAccList.AccList, option);
+                // AccountListName myAccListName = new AccountListName();
+                // myAccListName.DisplaySingleAccount(myAccList.AccList, option);
+                myAccList.DisplaySingleAccount(option);
             }
            
         }
