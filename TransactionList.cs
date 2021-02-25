@@ -40,26 +40,18 @@ namespace SupportBank
                         Console.WriteLine("Errors in CSV file, please check logger for details!"); 
                 }
             }   
-            // TransList.ForEach(Console.WriteLine);
             // foreach(Transaction tran in TransList)
             //     {
             //     Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From +" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
             //     }
         }
         public void ReadJsonFile(string path) {
-            // using (StreamReader r = new StreamReader(path))
-            // {
-                // string json = r.ReadToEnd();
                 string json = File.ReadAllText(path);
-                List<Transaction> TransList = JsonConvert.DeserializeObject<List<Transaction>>(json);
+                TransList = JsonConvert.DeserializeObject<List<Transaction>>(json);
                 // foreach(var tran in TransList)
                 // {
                 // Console.WriteLine(tran.Date.ToString("dd/MM/yyyy") +" " + tran.From+" " + tran.To +" " + tran.Narrative +" " + tran.Amount);
                 // }
-
-
-            // }
-
         }
     }
 }
