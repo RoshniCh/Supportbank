@@ -3,31 +3,49 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using NLog;
+using NLog.Config;
+using NLog.Targets;
 
 namespace SupportBank
 {
     class TransactionList
     {
+        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
         public List<Transaction> TransList = new List<Transaction>();
-        public void ReadCsvFile()
-        {
 
-            string path = "C:/Users/roscha/training/support-bank-resources/Transactions2014.csv";
-            string[] lines = System.IO.File.ReadAllLines(path);
+        public static ILogger Logger1 => Logger;
+
+        public void ReadCsvFile(string path)
+        {
+            var config = new LoggingConfiguration();
+            var target = new FileTarget { FileName = @"C:\Work\Logs\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
+            config.AddTarget("File Logger", target);
+            config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
+            LogManager.Configuration = config;
+
+            var lines = File.ReadAllLines(path).Skip(1);
+            int counter = 1;
             foreach(string line in lines) {
+                counter += 1;
                 string[] columns = line.Split(',');
-                if (columns[0]!="Date") {
-                    TransList.Add(new Transaction
-                        {
-                            Date = Convert.ToDateTime(columns[0]), 
-                            // Date = DateTime.ParseExact(columns[0], "dd/mm/yyyy", CultureInfo.InvariantCulture), 
-                            From = columns[1],
-                            To = columns[2],
-                            Narrative = columns[3],
-                            Amount = double.Parse(columns[4])
-                        }); 
-                    
-                }    
+                try {
+                TransList.Add(new Transaction
+                    {
+                        Date = Convert.ToDateTime(columns[0]), 
+                        From = columns[1],
+                        To = columns[2],
+                        Narrative = columns[3],
+                        Amount = double.Parse(columns[4])
+                    }); 
+                }
+                catch (Exception e) {
+                        Logger.Error("Invalid data entry at line " + counter + " of the CSV file.");
+                        Logger.Error(columns[0] + " " +columns[1] + " " + columns[2] + " " + columns[3] + " " + columns[4]);
+                        // throw e;
+                        Logger.Error(e);
+                        Console.WriteLine("Errors in CSV file, please check logger for details!"); 
+                }
             }   
             // TransList.ForEach(Console.WriteLine);
             // foreach(Transaction tran in TransList)

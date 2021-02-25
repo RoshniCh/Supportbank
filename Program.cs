@@ -17,10 +17,11 @@ namespace SupportBank
             config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
             LogManager.Configuration = config;
 
-            Logger.Error("test");
+            // Logger.Error("test");
 
+            string path = "C:/Users/roscha/training/support-bank-resources/DodgyTransactions2015.csv";
             TransactionList myTransList = new TransactionList();
-            myTransList.ReadCsvFile();
+            myTransList.ReadCsvFile(path);
             AccountList myAccList = new AccountList();
             myAccList.MakeAccList(myTransList.TransList);
 
